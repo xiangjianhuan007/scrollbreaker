@@ -26,3 +26,7 @@ Thumbs.db
 # 本地配置
 .env
 *.local
+
+# 发布凭据：绝不提交（PyPI 密码 / 2FA 密钥 / 恢复码 / token / cookie）
+.pypi_*
+.pypi_cookies_tmp.json
