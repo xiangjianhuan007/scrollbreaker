@@ -93,6 +93,28 @@ frame 3  new   article  same_type=false                    <- switched pages, ha
 
 That third line is the whole point: **wrong type, no merge — no matter the overlap.**
 
+## Android capture app (optional)
+
+`android/` contains the phone half of the pair: interval screen capture → dHash
+dedup → refuse password/payment screens → POST the frame to an endpoint you control.
+
+It is source, not a shipped app — you build it yourself, and **nothing leaves the
+device until you enter an endpoint**. Requires Android 11+ (API 30) because
+`AccessibilityService.takeScreenshot()` is the only unattended capture API.
+
+```
+android/          769 lines Kotlin, zero dependencies
+  CaptureService.kt   the loop + the four gates + the privacy gate
+  ImageSig.kt         dHash + blank detection
+  Uplink.kt           one POST, no SDK
+  CaptureConfig.kt    everything configurable, nothing hard-coded
+  MainActivity.kt     settings screen (built in code, no layouts)
+```
+
+See [android/README.md](android/README.md) for the permission trade-off, the payload
+shape and a 10-line receiver.
+
+
 ## Output shape
 
 ```json

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScrollBreaker Capture</string>
+    <string name="service_label">ScrollBreaker Capture</string>
+    <string name="service_desc">Captures the screen on an interval, skips unchanged frames and
+        password/payment screens, and POSTs each new frame to the endpoint you configure.
+        Nothing is uploaded until you enter an endpoint.</string>
+</resources>

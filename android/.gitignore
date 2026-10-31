@@ -1,0 +1,31 @@
+# Gradle / build output
+.gradle/
+build/
+app/build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio
+.idea/
+*.iml
+.navigation/
+
+# ── Signing material: never commit ──────────────────────────────
+*.jks
+*.keystore
+*.p12
+*.pfx
+keystore.properties
+signing.properties
+
+# Artefacts
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# OS noise
+.DS_Store
+Thumbs.db

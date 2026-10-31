@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Capability declaration for CaptureService.
+
+    canTakeScreenshot = true      — required: this is how frames are captured (API 30+).
+    canRetrieveWindowContent = true — required by exactly one code path: the privacy
+                                    gate, which walks the node tree looking for a
+                                    password-flagged input or marker words so it can
+                                    *refuse* to capture that screen. Nothing read from
+                                    the tree is stored, logged or uploaded.
+    accessibilityEventTypes        — the system requires at least one type for the
+                                    service to connect. The app ignores every event
+                                    (onAccessibilityEvent is an empty override), so
+                                    the narrowest useful type is declared.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:canRetrieveWindowContent="true"
+    android:canTakeScreenshot="true"
+    android:description="@string/service_desc"
+    android:notificationTimeout="100" />
