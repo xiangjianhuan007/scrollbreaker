@@ -1,10 +1,16 @@
 # ScrollBreaker
 
+**A scroll-aware screen content collector for LLM agents** — 一个会分辨页面的信息采集器。
+
 > **Your LLM is eating garbage. The screenshots are the problem.**
 >
 > Every scroll-capture tool on the planet splices frames together by line overlap.
 > That works — until it silently fuses an article and a chat log into one record
 > that looks perfectly normal. ScrollBreaker stops that with **four gates**.
+
+Most **information collectors** answer the question *"how do I grab the screen?"*
+ScrollBreaker answers the harder one: *"are these two grabs the same page at all?"*
+
 
 Screenshot → OCR → merge is the standard pipeline for feeding visual content to an
 agent. It has one failure mode that poisons your dataset and never warns you:

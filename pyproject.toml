@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "scrollbreaker"
 version = "0.1.0"
-description = "把滚动的屏幕切成能读的页：滚动累积 + 页面分界判定"
+description = "Scroll-aware screen content collector for LLM agents — 把滚动的屏幕切成能读的页"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "scrollbreaker contributors" }]
-keywords = ["ocr", "screen", "scroll", "llm", "agent", "capture"]
+keywords = ["ocr", "screen", "scroll", "llm", "agent", "capture", "information-collector", "content-collector"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
