@@ -1,0 +1,64 @@
+name: publish
+
+# Publishes to PyPI when you push a version tag, e.g.
+#
+#     git tag v0.1.1 && git push origin v0.1.1
+#
+# Uses PyPI **Trusted Publishing** — no API token is stored anywhere, GitHub mints
+# a short-lived OIDC token and PyPI verifies it against the publisher you registered.
+#
+# ── One-time setup (do this once, on pypi.org) ────────────────────────────────
+# 1. Create a PyPI account (email verification required).
+# 2. Go to https://pypi.org/manage/account/publishing/ and add a *pending publisher*:
+#      PyPI Project Name : scrollbreaker
+#      Owner             : xiangjianhuan007
+#      Repository name   : scrollbreaker
+#      Workflow name     : publish.yml
+#      Environment name  : pypi
+# 3. Push a tag. The first publish creates the project and the pending publisher
+#    becomes a real one.
+#
+# Until step 2 is done this workflow only runs on tags, so normal pushes to main
+# stay green — a missing publisher cannot break CI.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade build
+          python -m build
+      - name: Verify the wheel installs and runs
+        run: |
+          python -m venv /tmp/verify
+          /tmp/verify/bin/pip install dist/*.whl
+          /tmp/verify/bin/scrollbreaker --version
+          /tmp/verify/bin/scrollbreaker replay examples/frames.jsonl
+        env:
+          PYTHONIOENCODING: utf-8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  pypi:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write # OIDC token for Trusted Publishing
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
