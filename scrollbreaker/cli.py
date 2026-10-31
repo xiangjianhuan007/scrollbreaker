@@ -164,6 +164,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv=None) -> int:
+    # Windows 控制台默认编码（cp936/cp1252）打印中文会直接抛 UnicodeEncodeError，
+    # 表现为 `scrollbreaker --version` 在 Windows 上崩掉、在 Linux/macOS 上正常。
+    # 在解析参数之前就把流改掉，因为 argparse 的 --version 是在 parse 时输出的。
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
     args = build_parser().parse_args(argv)
     return args.func(args)
 

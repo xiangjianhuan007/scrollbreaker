@@ -33,9 +33,12 @@ jobs:
         run: pytest -q
 
       - name: Smoke test the CLI
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONUTF8: "1"
         run: |
-          scrollbreaker --version
-          scrollbreaker replay examples/frames.jsonl
+          python -m scrollbreaker.cli --version
+          python -m scrollbreaker.cli replay examples/frames.jsonl
 
   # 关键回归单跑一遍，失败时一眼看出是哪条闸门坏了
   gate-regression:
