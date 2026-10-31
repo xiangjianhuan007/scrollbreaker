@@ -1,0 +1,28 @@
+# 采集产物：绝不提交（里面有真实屏幕内容）
+*.jsonl
+!tests/fixtures/*.jsonl
+!examples/*.jsonl
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# 测试与工具
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 本地配置
+.env
+*.local
