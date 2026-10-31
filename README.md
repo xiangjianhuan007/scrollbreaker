@@ -39,6 +39,34 @@ ScrollBreaker refuses to merge unless four gates all pass.
 
 Fail any one → **new record, no merge. Ever.**
 
+## Install
+
+No PyPI account needed — the wheel is attached to the release:
+
+```bash
+pip install https://github.com/xiangjianhuan007/scrollbreaker/releases/download/v0.1.0/scrollbreaker-0.1.0-py3-none-any.whl
+```
+
+Or from source, if you want to poke at it:
+
+```bash
+git clone https://github.com/xiangjianhuan007/scrollbreaker
+cd scrollbreaker
+pip install -e ".[dev]"
+pytest -q
+```
+
+Verify the install the same way CI does:
+
+```bash
+scrollbreaker --version
+scrollbreaker replay examples/frames.jsonl
+```
+
+Zero runtime dependencies. The `image` extra (`pillow`, `mss`) is only needed if you
+want to feed it real screenshots instead of OCR'd text.
+
+
 There is a fifth state, `mixed`: a frame containing both article and chat/list
 signatures. That frame *is* a page transition in progress, so it can neither start
 an accumulation nor be absorbed into one.
