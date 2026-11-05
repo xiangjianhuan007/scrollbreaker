@@ -15,7 +15,7 @@ whether two captures are the same page — instead of assuming they are.
 > perfectly normal, parses fine, embeds fine, and is **wrong**.
 > Nothing downstream will ever warn you.
 
-![Four gates decide merge or new record](docs/gates.svg)
+![ScrollBreaker demo: install, replay, three decisions](docs/demo.gif)
 
 ## 30 seconds
 
@@ -77,6 +77,8 @@ ScrollBreaker refuses to merge unless four gates all pass.
 | 4 | Real overlap | ≥ N **identical** lines, because 1 line is noise | `2` |
 
 Fail any one → **new record, no merge. Ever.**
+
+![Four gates decide merge or new record](docs/gates.svg)
 
 ## Install
 
